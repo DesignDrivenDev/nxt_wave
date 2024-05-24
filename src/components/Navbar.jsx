@@ -1,4 +1,10 @@
 import React from "react";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -20,25 +26,15 @@ const Navbar = () => {
                 + Add
               </Link>
 
-              <Link
-                to={"/"}
-                className="hidden rounded-full bg-gray-100 px-2 py-2 text-sm font-medium  transition sm:block"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                  />
-                </svg>
-              </Link>
+              <div className="flex justify-center rounded-md bg-gray-100 px-4 py-1 text-sm font-medium  transition cursor-pointer">
+                <SignedOut>
+                  <SignInButton />
+                </SignedOut>
+                <SignedIn>
+                  {/* <UserButton  /> */}
+                  <UserButton afterSignOutUrl="/sign-in" />
+                </SignedIn>
+              </div>
             </div>
 
             <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">

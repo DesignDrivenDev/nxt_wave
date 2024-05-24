@@ -3,6 +3,8 @@ import App from "../App";
 import Home from "../components/Home";
 import AddResources from "../components/AddResources";
 import About from "../components/About";
+import SignInPage from "./sign-in";
+import SignUpPage from "./sign-up";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/sign-in",
+        element: <SignInPage />,
+      },
+      {
+        path: "/sign-up",
+        element: <SignUpPage />,
       },
     ],
   },

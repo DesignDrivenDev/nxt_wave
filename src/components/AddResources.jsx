@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { SignIn, useUser } from "@clerk/clerk-react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { toast, ToastContainer } from "react-toastify";
@@ -16,6 +17,7 @@ const tagNames = [
 ];
 
 const AddResources = () => {
+  const { user } = useUser();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
@@ -90,6 +92,14 @@ const AddResources = () => {
       toast.error("An error occurred. Please try again.");
     }
   };
+
+  if (!user) {
+    return (
+      <div className="h-screen grid place-items-center">
+        <SignIn />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#fbfbfb] relative">

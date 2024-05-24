@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ResourceCard from "./ResourceCard";
 import { setResources } from "../features/resource/resourceSlice";
+import { SignIn, useUser } from "@clerk/clerk-react";
 
 const Home = () => {
+  const { user } = useUser();
   const dispatch = useDispatch();
   const resources = useSelector((state) => state?.resource?.resources);
   const [active, setActive] = useState("resources");
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const ITEMS_PER_PAGE = 6; // Number of items per page
+
   const getResources = async () => {
     const response = await fetch(
       "https://media-content.ccbp.in/website/react-assignment/resources.json"
@@ -80,6 +83,13 @@ const Home = () => {
 
   const resourcesData = paginatedResources(filteredResources);
 
+  if (!user) {
+    return (
+      <div className="h-screen grid place-items-center">
+        <SignIn />
+      </div>
+    );
+  }
   return (
     <div className="max-w-screen-lg mx-auto w-11/12 pt-24">
       <nav className="grid grid-cols-1 md:grid-cols-3 max-w-2xl mx-auto border-2 divide-x-2 rounded-md ">
